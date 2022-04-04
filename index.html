@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <form>
+        <h1><u>Expense Tracker</u></h1>
+        <h3>Select Month</h3>
+        <select name="Month" id="month">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+       </select>
+       <h3>Income</h3>
+       <input id="income" type="number" placeholder="Enter income in RS">
+       <h3>Expense</h3>
+       <input id="expense"  type="number" placeholder="Enter Expense in RS"><br>
+       <button class="btn">Submit</button>
+
+    </form>
+    </div>
+
+    
+    
+</body>
+<style>
+
+
+body{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+
+}
+    .container{
+        margin: 30px auto;
+        width: 350px;
+    }
+h1 {
+    color: aqua;
+    font-size: 40px;
+    
+}
+h3 {
+    margin: 40px 0 10px;
+}
+.btn {
+    cursor: pointer;
+    background-color: aqua;
+    display:inline-flexbox;
+    font-size: 20px;
+    margin: 10px 0 30px;
+    padding: 8px;
+    width: 100%;
+
+}
+
+</style>
+<script>
+    const month=document.getElementById('month');
+    const income=document.getElementById('income');
+    const expense=document.getElementById('expense')
+
+    localStorage.setItem("month", month.value);
+    localStorage.setItem("income", income.value);
+    localStorage.setItem("expense", expense.value);
+
+    var display=localStorage.getItem("month");
+    var display=localStorage.getItem("income");
+    var display=localStorage.getItem("expense");
+</script>
+
+
+</html>
+
