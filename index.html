@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+        #forms{
+            margin: auto;
+           justify-items: center;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 15vh;
+            text-align: center;
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-    <form>
-        <h1><u>Expense Tracker</u></h1>
-        <h3>Select Month</h3>
-        <select name="Month" id="month">
+<div class="container">
+    <form id="forms" onsubmit="store()">
+        <p>Select Month</p>
+        <select name="months" id="months_name">
             <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
@@ -22,69 +42,64 @@
             <option value="October">October</option>
             <option value="November">November</option>
             <option value="December">December</option>
-       </select>
-       <h3>Income</h3>
-       <input id="income" type="number" placeholder="Enter income in RS">
-       <h3>Expense</h3>
-       <input id="expense"  type="number" placeholder="Enter Expense in RS"><br>
-       <button class="btn">Submit</button>
-
+        </select>
+       <p>Income</p>
+       <input type="number" name="income">
+       <p>Expense</p>
+       <input type="number" name="expanse">
+       <button onsubmit="store()">Submit</button>
     </form>
-    </div>
+    <div id="box"></div>
+    <script>
+        const store=()=>{
+            event.preventDefault();
+            var expanse_tracker=localStorage.getItem("expanse_tracker")
+            if(expanse_tracker === null){
+                localStorage.setItem("expanse_tracker", "[]")
+            }
+            var form=document.getElementById("forms")
+            var month=form["months"].value
+            var income=form['income'].value
+            var expanse=form["expanse"].value
+            
+            var data={
+                month,income,expanse
+            }
+            console.log(data)
+            var arr=JSON.parse(localStorage.getItem("expanse_tracker"))
+           arr.push(data)
+            console.log(arr)
+            localStorage.setItem("expanse_tracker",JSON.stringify(arr))
+            show()
+        }
 
-    
-    
+        var box=document.getElementById("box")
+        const show=()=>{
+           box.innerHTML=null
+
+           let arr=JSON.parse(localStorage.getItem("expanse_tracker"))
+
+           arr.forEach((ele) => {
+               var div=document.createElement("div")
+
+               let month=document.createElement("p")
+               month.innerText=ele.month
+
+               let income=document.createElement("p")
+
+               income.innerText=`Your income is Rs ${ele.income}/-`
+
+               let expense=document.createElement("p")
+               expense.innerText=`Your expense is Rs ${ele.expanse}/-`
+
+               let saving=ele.income-ele.expanse
+
+               let save=document.createElement("p")
+               save.innerText=`Your Savings are Rs ${`
+
+           });
+        }
+    </script>
+</div>
 </body>
-<style>
-
-
-body{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-
-}
-    .container{
-        margin: 30px auto;
-        width: 350px;
-    }
-h1 {
-    color: aqua;
-    font-size: 40px;
-    
-}
-h3 {
-    margin: 40px 0 10px;
-}
-.btn {
-    cursor: pointer;
-    background-color: aqua;
-    display:inline-flexbox;
-    font-size: 20px;
-    margin: 10px 0 30px;
-    padding: 8px;
-    width: 100%;
-
-}
-
-</style>
-<script>
-    const month=document.getElementById('month');
-    const income=document.getElementById('income');
-    const expense=document.getElementById('expense')
-
-    localStorage.setItem("month", month.value);
-    localStorage.setItem("income", income.value);
-    localStorage.setItem("expense", expense.value);
-
-    var display=localStorage.getItem("month");
-    var display=localStorage.getItem("income");
-    var display=localStorage.getItem("expense");
-</script>
-
-
 </html>
-
